@@ -1,6 +1,7 @@
 '''
 Tests for models
 '''
+from unittest.mock import patch
 from decimal import Decimal
 
 from django.test import TestCase
@@ -83,3 +84,16 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingredient(self):
+        '''Test creating an ingredient'''
+        user = create_user(email='test@example.com',
+            password='testpass123')
+        ingredient = models.Ingredient.objects.create(
+            user=user,
+            name='Cucumber'
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
+
+    @pa
